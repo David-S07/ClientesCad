@@ -1,0 +1,115 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            
+            <div class="alert alert-success" role="alert" *ngIf="mensagemSucesso">
+                {{ mensagemSucesso }}
+            </div>
+           
+            <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+                {{ mensagemErro }}
+            </div> 
+        </div>
+    </div>
+
+  
+
+    <div class="form-group row">
+    
+            <div class="col-md-6">
+                <button class="btn btn-warning" (click)="novoCadastro()">
+                    <i class="fa fa-plus"></i> Novo
+                </button>
+            </div>
+            <div class="col-md-4">
+                <label>Filtrar Clientes Ativos</label>
+                <select class="form-control"  name="tipoDePessoa">
+                    <option>PJ</option>
+                    <option>PF</option>
+                </select>
+            </div>
+            
+    </div>
+
+    <br />
+
+    <div class="form-group row">
+        <label class="col-sm-1 col-form-label"> Filtrar: </label>
+        <div class="col-sm-11">
+            <input type="text" class="form-control" [(ngModel)]="filter" >
+        </div>
+        <!--<input placeholder=" Pesquisar Clientes" [(ngModel)]="filtradoString" (ngModelChange)="onFilterChange()" />-->
+    </div>
+
+    <br />
+    <div class="row">
+   
+        <div class="col-md-12">
+            <table  class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>CPF/CNPJ</th>
+                        <th>Data Cad.</th>
+                        <th>Pessoa</th>
+                        <th>RG</th>
+                        <th>DDD</th>
+                        <th>Telefone</th>
+                        <th>Tel Adic.</th>
+                        <th>Ativo</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of clientes">
+                       <td>{{ cliente.id }}</td>
+                       <td>{{ cliente.nome }}</td>
+                       <td>{{ cliente.cpf }}</td>
+                       <td>{{ cliente.dataCadastro }}</td>
+                       <td>{{ cliente.tipoDePessoa }}</td>
+                       <td>{{ cliente.rg }}</td>
+                       <td>{{ cliente.ddd }}</td>
+                       <td>{{ cliente.telefone1 }}</td>
+                       <td>{{ cliente.telefone2 }}</td>
+                       <input type="checkbox" disabled [(ngModel)]="cliente.status" class="form-control ml+1">
+                       <td>
+                            <button class="btn btn-primary" 
+                            routerLink="/clientes-form/{{ cliente.id }}">
+                            <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger" (click)="preparaDelecao(cliente)" data-toggle="modal" data-target="#modalDelecao">
+                            <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Confirmação</h4>
+                </div>
+
+                <div class="modal-body" *ngIf="clienteSelecionado">
+                    Confirma a deleção do(a) cliente {{ clienteSelecionado.nome }} ?
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="deletarCliente()" data-dismiss="modal">Confirmar</button>
+                    <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,106 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">{{ cliente.id ? 'Edição' : 'Cadastro'}}</li>
+</ol>
+<div class="container">
+
+    <form #clienteForm="ngForm" (ngSubmit)="onSubmit()">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Cliente Salvo/atualizado com Sucesso
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{ erro }}
+                </div> 
+            </div>
+        </div>
+
+        <div class="row" *ngIf="cliente.id">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Id: </label>
+                    <input type="text"  name="id" [ngModel]="cliente.id" class="form-control" disabled="true">
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="cliente.dataCadastro">
+                <div class="form-group">
+                    <label>Data Cadastro: </label>
+                    <input type="text" class="form-control" name="dataCadastro" [ngModel]="cliente.dataCadastro" disabled="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Nome: * </label>
+                    <input type="text" class="form-control" [(ngModel)]="cliente.nome" name="nome">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Tipo de Pessoa </label>
+                    <select class="form-control" [(ngModel)]="cliente.tipoDePessoa" name="tipoDePessoa">
+                        <option>PJ</option>
+                        <option>PF</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>Ativo: * </label>
+                    <input type="checkbox" required=true name="status" [(ngModel)]="cliente.status" class="form-control">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>RG: * </label>
+                    <input type="text" maxlength="9" minlength="9" placeholder="00.000.000-0" required=true name="rg" [(ngModel)]="cliente.rg" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>CPF: * </label>
+                    <input  type="text" maxlength="11" minlength="11" placeholder="000.000.000-00" class="form-control" [(ngModel)]="cliente.cpf" name="cpf">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>DDD: * </label>
+                    <input type="text" maxlength="2" minlength="2" placeholder="00" class="form-control" [(ngModel)]="cliente.ddd" name="ddd">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Telefone: * </label>
+                    <input type="text" maxlength="9" minlength="9" placeholder="00000-0000" required=true name="telefone1" [(ngModel)]="cliente.telefone1" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Telefone Adicional: </label>
+                    <input type="text"  maxlength="9" placeholder="00000-0000" name="telefone2" [(ngModel)]="cliente.telefone2" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" *ngIf="!cliente.id">
+                    <i class="fa fa-save"></i> Salvar
+                </button>
+                <button type="submit" class="btn btn-primary" *ngIf="cliente.id">
+                    <i class="fa fa-sync-alt"></i> Atualizar
+                </button>
+                <button type="button" class="btn btn-danger ml-1" (click)="voltarParaListagem()">
+                    <i class="fa fa-arrow-alt-circle-left"></i>  Voltar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
