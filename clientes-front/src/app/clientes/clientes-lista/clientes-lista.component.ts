@@ -22,6 +22,9 @@ export class ClientesListaComponent implements OnInit {
   _filterTipo: string;
   filteredClientes:  Cliente[] = [];
 
+  typePeoplePJ: boolean = false;
+  typePeople: String;
+
   constructor(private service: ClientesService, private router: Router) {  
    }
    
@@ -68,5 +71,15 @@ export class ClientesListaComponent implements OnInit {
   get filter() : string {
     return this._filter;
   }
+
+  selecionaTipoPessoa(value: string) {
+    this.typePeople = value;
+    if(this.typePeople.indexOf("PJ")) {
+      this.typePeoplePJ = true;
+    } else {  
+      this.typePeoplePJ = false;
+    }
+  }
+
 
 }

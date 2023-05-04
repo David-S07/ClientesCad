@@ -17,6 +17,8 @@ export class ClientesFormComponent implements OnInit {
   success: boolean = false;
   errors: String [];
   id: number;
+  typePeoplePJ: boolean = false;
+  typePeople: String;
 
   constructor( 
     private service: ClientesService, 
@@ -49,6 +51,7 @@ export class ClientesFormComponent implements OnInit {
       .subscribe(response => {
         this.success = true;
         this.errors = null;
+      
         } , errorResponse => {
           this.errors = ['Erro ao atualizar o cliente.']
         })
@@ -65,9 +68,16 @@ export class ClientesFormComponent implements OnInit {
       this.errors = errorResponse.error.errors;
       }
     )
-    }
+    }    
+  }
 
-    
+  selecionaTipoPessoa(value: string) {
+    this.typePeople = value;
+    if(this.typePeople.indexOf("PJ")) {
+      this.typePeoplePJ = true;
+    } else {  
+      this.typePeoplePJ = false;
+    }
   }
 
   voltarParaListagem() {
