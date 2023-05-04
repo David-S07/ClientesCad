@@ -19,18 +19,20 @@ export class ClientesListaComponent implements OnInit {
   mensagemErro: string;
 
   _filter: string;
+  _filterTipo: string;
   filteredClientes:  Cliente[] = [];
 
-  constructor(private service: ClientesService, private router: Router) {
-    
+  constructor(private service: ClientesService, private router: Router) {  
    }
-
+   
   ngOnInit(): void {
     this.service.getCliente()
-    .subscribe( resposta => this.clientes = resposta);
-    this.filteredClientes = this.clientes;
+    .subscribe((resp: Cliente[]) => {
+      this.clientes = resp;
+      this.filteredClientes = resp;
+    });
   }
-
+  
   novoCadastro() {
     this.router.navigate(['/clientes-form'])
   }
@@ -47,6 +49,15 @@ export class ClientesListaComponent implements OnInit {
       this.ngOnInit();
     },
       erro => this.mensagemErro = 'Ocorreu um erro ao deletar o cliente. ')
+  }
+
+  set filterTipoPessoa(value: string) {
+    this._filterTipo = value;
+    this.filteredClientes = this.clientes.filter((cliente: Cliente) => cliente.tipoDePessoa.toLocaleLowerCase().indexOf(this._filterTipo.toLocaleLowerCase()) > -1);
+  }
+
+  get filterTipoPessoa() : string {
+    return this._filterTipo;
   }
 
   set filter(value: string) {
