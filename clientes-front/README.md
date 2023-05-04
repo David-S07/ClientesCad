@@ -26,6 +26,6 @@ Esse repositório é o dront-end da aplicação de cadastro de clientes -> https
 ## Observações: 
 
 	- Para os registros pré setados aparecerem o back-end tem que estar rodando.
-	- a porta padrão utilizada é [localhost:8080](http://localhost:8080/api/clientes/)
+	- a porta padrão utilizada é http://localhost:4200/home
 	- as query serão printadas no log da sua IDE durante a execução
 
