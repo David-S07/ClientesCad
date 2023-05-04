@@ -2,7 +2,7 @@
 clientes front-end em angular
 
 ## Overview
-Esse repositório é o dront-end da aplicação de cadastro de clientes -> https://github.com/David-S07/Clientes-back-end
+Esse repositório é o front-end da aplicação de cadastro de clientes -> https://github.com/David-S07/Clientes-back-end
 
 ## Guidelines
 
